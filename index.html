@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Responsive Resume Template with Form</title>
+    <link rel="stylesheet" href="form-styles.css">
+  
+</head>
+<body>
+<nav>
+    CV BUILDER
+</nav>
+    <!-- Form Section -->
+    <div class="form-container">
+        <h2>Enter Your Details</h2>
+        <form id="cvForm">
+            <label for="name">Name:</label>
+            <input type="text" id="name" name="name" required>
+
+            <label for="email">Email:</label>
+            <input type="email" id="email" name="email" required>
+
+            <label for="phone">Phone:</label>
+            <input type="tel" id="phone" name="phone" required>
+
+            <label for="age">Age:</label>
+            <input type="number" id="age" name="age" required>
+
+            <label for="about">About Me:</label>
+            <textarea id="about" name="about" required></textarea>
+
+            <label for="objective">Objective:</label>
+            <textarea id="objective" name="objective" required></textarea>
+
+            <label for="skills">Skills (comma separated):</label>
+            <input type="text" id="skills" name="skills" required>
+
+            <label for="hobbies">Hobbies (comma separated):</label>
+            <input type="text" id="hobbies" name="hobbies" required>
+
+            <label for="education">Education (comma separated):</label>
+            <input type="text" id="education" name="education" required>
+
+            <label for="profileImage">Profile Image:</label>
+            <input type="file" id="profileImage" name="profileImage" accept="image/*">
+
+            
+            
+
+            <button type="submit">Generate CV</button>
+        </form>
+    </div>
+
+    <!-- Generated CV Section -->
+    <div class="resume-container" id="resumeContainer" style="display:none;">
+        <!-- Profile Section -->
+        <div class="profile-section">
+            <div class="profile-image">
+                <img id="cvProfileImage" src="https://www.svgrepo.com/show/311063/person.svg" alt="Profile Image">
+            </div>
+            <h1 id="cvName">Your Name</h1>
+            <p id="cvEmail">Email: your.email@example.com</p>
+            <p id="cvPhone">Phone: +123456789</p>
+            <p id="cvAge">Age: 30</p>
+        </div>
+
+        <!-- Grid Layout for About, Objective, Skills, Hobbies, and Education -->
+        <div class="grid-layout">
+            <div class="left-column">
+                <section>
+                    <h2>About Me</h2>
+                    <p id="cvAbout"></p>
+                </section>
+
+                <section>
+                    <h2>Objective</h2>
+                    <p id="cvObjective"></p>
+                </section>
+            </div>
+
+            <div class="right-column">
+                <section>
+                    <h2>Skills</h2>
+                    <ul id="cvSkills">
+                        <!-- Dynamic Skills Will Be Inserted Here -->
+                    </ul>
+                </section>
+
+                <section>
+                    <h2>Hobbies</h2>
+                    <ul id="cvHobbies">
+                        <!-- Dynamic Hobbies Will Be Inserted Here -->
+                    </ul>
+                </section>
+
+                <section>
+                    <h2>Education</h2>
+                    <p id="cvEducation"></p>
+                </section>
+            </div>
+        </div>
+
+        <!-- Edit Button -->
+        <button id="editBtn" class="edit-btn" onclick="editResume()">Edit</button>
+        <button class="edit-btn" onclick="shareResume()">Share Resume Link</button>
+        <button class="edit-btn" onclick="downloadPDF()">Download as PDF</button>
+    </div>
+   
+    <button id="toggleBtn" class="toggle-btn" onclick="toggleResume()">Show CV</button>
+
+    <footer>
+        @2024 Your CV 
+    </footer>
+    <script src="tyscript.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.9.2/html2pdf.bundle.min.js"></script>
+    
+</body>
+</html>
