@@ -22,7 +22,7 @@ var toggleBtn = document.getElementById('toggleBtn');
 var editBtn = document.getElementById('editBtn');
 // Handle form submission
 cvForm === null || cvForm === void 0 ? void 0 : cvForm.addEventListener('submit', function (event) {
-    var _a, _b, _c;
+    var _a, _b, _c, _d;
     event.preventDefault();
     // Get form values
     var name = (nameInput === null || nameInput === void 0 ? void 0 : nameInput.value) || '';
@@ -31,9 +31,9 @@ cvForm === null || cvForm === void 0 ? void 0 : cvForm.addEventListener('submit'
     var age = (ageInput === null || ageInput === void 0 ? void 0 : ageInput.value) || '';
     var about = (aboutInput === null || aboutInput === void 0 ? void 0 : aboutInput.value) || '';
     var objective = (objectiveInput === null || objectiveInput === void 0 ? void 0 : objectiveInput.value) || '';
-    var skills = (nameInput === null || nameInput === void 0 ? void 0 : nameInput.value.split(',')) || [];
-    var hobbies = ((_a = document.getElementById('hobbies')) === null || _a === void 0 ? void 0 : _a.value.split(',')) || [];
-    var education = ((_b = document.getElementById('education')) === null || _b === void 0 ? void 0 : _b.value.split(',')) || [];
+    var skills = ((_a = document.getElementById('skills')) === null || _a === void 0 ? void 0 : _a.value.split(',')) || [];
+    var hobbies = ((_b = document.getElementById('hobbies')) === null || _b === void 0 ? void 0 : _b.value.split(',')) || [];
+    var education = ((_c = document.getElementById('education')) === null || _c === void 0 ? void 0 : _c.value.split(',')) || [];
     // Populate CV fields
     if (cvName)
         cvName.textContent = name;
@@ -75,7 +75,7 @@ cvForm === null || cvForm === void 0 ? void 0 : cvForm.addEventListener('submit'
         });
     }
     // Handle image update
-    var imageFile = (_c = profileImageInput === null || profileImageInput === void 0 ? void 0 : profileImageInput.files) === null || _c === void 0 ? void 0 : _c[0];
+    var imageFile = (_d = profileImageInput === null || profileImageInput === void 0 ? void 0 : profileImageInput.files) === null || _d === void 0 ? void 0 : _d[0];
     if (imageFile) {
         var reader = new FileReader();
         reader.onload = function (e) {
@@ -118,11 +118,29 @@ function editResume() {
 }
 // Share Resume
 function shareResume() {
+    var nameInput = document.getElementById('name');
     var name = (nameInput === null || nameInput === void 0 ? void 0 : nameInput.value.replace(/\s+/g, '').toLowerCase()) || 'resume';
-    var userURL = "https://".concat(name, ".vercel.app/resume");
+    var userURL = "https://".concat(name, ".vercel.app");
     navigator.clipboard
         .writeText(userURL)
-        .then(function () { return alert("Resume link copied to clipboard: ".concat(userURL)); })
+        .then(function () {
+        // Display an alert when the link is copied
+        alert("Resume link copied to clipboard: ".concat(userURL));
+        // Check if a shareable link already exists, if not, create one
+        var buttonContainer = document.querySelector('.button-container');
+        var shareableLinkDiv = document.getElementById('shareableLink');
+        if (!shareableLinkDiv) {
+            shareableLinkDiv = document.createElement('div');
+            shareableLinkDiv.id = 'shareableLink';
+            shareableLinkDiv.style.marginTop = '10px';
+            shareableLinkDiv.style.textAlign = 'center';
+            shareableLinkDiv.style.fontSize = '14px';
+            shareableLinkDiv.style.color = 'blue';
+            buttonContainer.appendChild(shareableLinkDiv);
+        }
+        // Update the content of the shareable link
+        shareableLinkDiv.innerHTML = "\n                <p>Shareable Link: <a href=\"".concat(userURL, "\" target=\"_blank\">").concat(userURL, "</a></p>\n            ");
+    })
         .catch(function (error) { return console.error('Copy failed', error); });
 }
 function downloadPDF() {

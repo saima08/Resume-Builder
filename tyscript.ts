@@ -35,7 +35,7 @@ cvForm?.addEventListener('submit', (event) => {
     const age = ageInput?.value || '';
     const about = aboutInput?.value || '';
     const objective = objectiveInput?.value || '';
-    const skills = nameInput?.value.split(',') || [];
+    const skills =(document.getElementById('skills') as HTMLInputElement)?.value.split(',') || [];
     const hobbies = (document.getElementById('hobbies') as HTMLInputElement)?.value.split(',') || [];
     const education = (document.getElementById('education') as HTMLInputElement)?.value.split(',') || [];
 
@@ -113,15 +113,43 @@ function editResume(): void {
     if (toggleBtn) toggleBtn.style.display = 'none';
 }
 
+
 // Share Resume
 function shareResume(): void {
+    const nameInput = document.getElementById('name') as HTMLInputElement | null;
     const name = nameInput?.value.replace(/\s+/g, '').toLowerCase() || 'resume';
-    const userURL = `https://${name}.vercel.app/resume`;
+    const userURL = `https://${name}.vercel.app`;
+
     navigator.clipboard
         .writeText(userURL)
-        .then(() => alert(`Resume link copied to clipboard: ${userURL}`))
+        .then(() => {
+            // Display an alert when the link is copied
+            alert(`Resume link copied to clipboard: ${userURL}`);
+
+            // Check if a shareable link already exists, if not, create one
+            const buttonContainer = document.querySelector('.button-container') as HTMLElement;
+            let shareableLinkDiv = document.getElementById('shareableLink');
+
+            if (!shareableLinkDiv) {
+                shareableLinkDiv = document.createElement('div');
+                shareableLinkDiv.id = 'shareableLink';
+                shareableLinkDiv.style.marginTop = '10px';
+                shareableLinkDiv.style.textAlign = 'center';
+                shareableLinkDiv.style.fontSize = '14px';
+                shareableLinkDiv.style.color = 'blue';
+                buttonContainer.appendChild(shareableLinkDiv);
+            }
+
+            // Update the content of the shareable link
+            shareableLinkDiv.innerHTML = `
+                <p>Shareable Link: <a href="${userURL}" target="_blank">${userURL}</a></p>
+            `;
+        })
         .catch((error) => console.error('Copy failed', error));
 }
+
+
+
 
 // Download Resume as PDF
 declare const html2pdf: any; // Declare html2pdf globally

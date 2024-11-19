@@ -191,21 +191,30 @@ ul li {
     transform: translateY(-2px);
 }
 
+/* Container for Buttons */
+.button-container {
+    display: flex;
+    justify-content: center; /* Center the buttons horizontally */
+    gap: 15px; /* Space between buttons */
+    margin-top: 20px; /* Add spacing from other elements */
+}
+
+/* Buttons */
 .edit-btn {
-    display: block;
-    margin: var(--spacing) auto;
-    padding: 12px 20px;
-    background-color: var(--edit-button-bg);
+    display: inline-block; /* Ensure inline-block for better spacing */
+    padding: 10px 20px;
+    background-color: var(--button-bg); /* Blue color */
     color: #ffffff;
     border: none;
     border-radius: var(--border-radius);
     cursor: pointer;
     box-shadow: var(--box-shadow);
     transition: background-color 0.3s ease, transform 0.2s ease;
+    text-align: center;
 }
 
 .edit-btn:hover {
-    background-color: var(--edit-button-bg-hover);
+    background-color: var(--button-bg-hover); /* Darker blue */
     transform: translateY(-2px);
 }
 
